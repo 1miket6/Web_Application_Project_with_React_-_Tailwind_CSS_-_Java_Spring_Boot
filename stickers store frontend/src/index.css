@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-primary: "Courier New", monospace;
+  --color-primary: #ff9800;
+  --color-dark: yellow;
+  --color-bg: #4e342e;
+  --color-border: black;
+}

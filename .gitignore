@@ -1,0 +1,20 @@
+# Node / React
+node_modules/
+dist/
+build/
+.env
+.env.local
+*.log
+
+# Java / Spring Boot
+target/
+*.iml
+*.class
+.gradle/
+out/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
