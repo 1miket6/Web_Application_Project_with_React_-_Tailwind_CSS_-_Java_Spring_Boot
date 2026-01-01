@@ -26,4 +26,5 @@ stickers-data/
 mysql.sock
 # installers
 *.exe
-
+*.txt
+WSL_Project_Push.txt
