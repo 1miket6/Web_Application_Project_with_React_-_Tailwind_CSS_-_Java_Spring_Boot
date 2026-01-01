@@ -24,3 +24,6 @@ out/
 stickers-data/
 **/*.sock
 mysql.sock
+# installers
+*.exe
+
