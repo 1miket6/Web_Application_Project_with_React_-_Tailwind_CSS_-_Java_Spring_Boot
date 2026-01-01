@@ -2,10 +2,15 @@
 
 @import "tailwindcss";
 
+@custom-variant dark (&:where(dark,.dark *));
+
 @theme {
   --font-primary: "Courier New", monospace;
-  --color-primary: #ff9800;
-  --color-dark: yellow;
+  --color-primary: #ffff00;
+  --color-dark: #555500;
   --color-bg: #4e342e;
-  --color-border: black;
+  --color-bg2: #271a17;
+  --color-normalbg: #99a1af;
+  --color-darkbg: #4f535a;
+  --color-border: #4e342e;
 }

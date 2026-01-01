@@ -18,3 +18,9 @@ out/
 .idea/
 .vscode/
 *.swp
+
+# Ignore local database/runtime directory
+/stickers-data/
+stickers-data/
+**/*.sock
+mysql.sock

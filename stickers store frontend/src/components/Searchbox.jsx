@@ -4,12 +4,12 @@ export default function Searchbox({label, placeholder, value, handleSearch}) {
 
   return (
     <div className='flex items-center gap-3 pl-4 flex-1 font-primary'>
-        <label className='text-lg font-semibold text-primary'>
+        <label className='text-lg font-semibold text-primary dark:text-dark'>
             {label}
         </label>
         <input 
             type="text" 
-            className='px-4 py-2 text-base border rounded-md transition border-primary focus:ring focus:ring-dark focus:outline-none text-white' 
+            className='px-4 py-2 text-base border rounded-md transition border-primary dark:border-dark focus:ring focus:ring-dark focus:outline-none dark:focus:ring-primary text-darkbg dark:text-normalbg' 
             placeholder={placeholder}
             value={value}
             onChange={(event)=>handleSearch(event.target.value)}/>
