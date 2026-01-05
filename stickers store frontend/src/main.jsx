@@ -2,50 +2,76 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from "react-router-dom";
 import Home from "./components/Home.jsx";
 import About from "./components/About.jsx";
 import Contact from "./components/Contact.jsx";
 import Login from "./components/Login.jsx";
 import Cart from "./components/Cart.jsx";
 import Errorpage from "./components/Errorpage.jsx";
+import { productsLoader } from "./components/Home.jsx";
+import { contactAction } from "./components/Contact.jsx";
+import { ToastContainer, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ProductDetail from "./components/ProductDetail.jsx";
 
-
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <App/>,
-    errorElement:<Errorpage/>,          //define at parent is the best coz the same error page
-    children:[
-   {
-      index: true,
-      element: <Home/>
-    },
-    {
-    path: "/home",
-    element: <Home/>
-    },
-   {
-    path: "/about",
-    element: <About/>
-    },
-   {
-    path: "/contact",
-    element: <Contact/>
-    },
-   {
-    path: "/Login",
-    element: <Login/>
-    },
-   {
-    path: "/cart",
-    element: <Cart/>
-    }
-    ]}
-])
+const routeDefinition = createRoutesFromElements(             //recommended
+<Route path="/" element={<App/>} errorElement={<Errorpage/>}>
+  <Route index element={<Home/>} loader={productsLoader}/>
+  <Route path="/home" element ={<Home/>} loader={productsLoader}/>
+  <Route path="/about" element ={<About/>} />
+  <Route path="/contact" element={<Contact/>} action={contactAction}/>
+  <Route path="/login" element={<Login/>} />
+  <Route path="/cart" element={<Cart/>} />
+  <Route path="/products/:productId" element={<ProductDetail/>} />
+  </Route>
+);
+const appRouter = createBrowserRouter(routeDefinition);
+// const appRouter = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App/>,
+//     errorElement:<Errorpage/>,          //define at parent is the best coz the same error page
+//     children:[
+//    {
+//       index: true,
+//       element: <Home/>
+//     },
+//     {
+//     path: "/home",
+//     element: <Home/>
+//     },
+//    {
+//     path: "/about",
+//     element: <About/>
+//     },
+//    {
+//     path: "/contact",
+//     element: <Contact/>
+//     },
+//    {
+//     path: "/Login",
+//     element: <Login/>
+//     },
+//    {
+//     path: "/cart",
+//     element: <Cart/>
+//     }
+//     ]}
+// ])
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={appRouter}/>
+    <ToastContainer
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      draggable
+      pauseOnHover
+      theme={localStorage.getItem("theme") === "dark"?"dark":"light"}
+      transition={Bounce}
+    />
   </StrictMode>
 );

@@ -3,48 +3,56 @@ import PageHeading from "./PageHeading";
 import ProductListings from "./ProductListings";
 import apiClient from "../api/apiClient";
 import {useState,useEffect} from "react";
+import { useLoaderData, useLocation } from "react-router-dom";
 
 export default function Home() {
+
+const products = useLoaderData();
+// const location = useLocation();
+// const username = location.state;
+// const path = location.pathname;
+// console.log(username); 
+// console.log(path); 
 // Hooks
-const [products,setProducts] = useState([]);
-const [loading,setLoading] = useState(true);
-const [error,setError] = useState(null);
+// const [products,setProducts] = useState([]);
+// const [loading,setLoading] = useState(true);
+// const [error,setError] = useState(null);
 
 
-useEffect(()=>{fetchProducts()},[]); // Run once when the componenet mounts,
-                      // mounting is the process of creating and adding the component into DOM.
+// useEffect(()=>{fetchProducts()},[]); // Run once when the componenet mounts,
+//                       // mounting is the process of creating and adding the component into DOM.
 
-const fetchProducts = async() => {
-  try {
-    setLoading(true);
-    const response = await apiClient.get("/products"); //Axios GET Request
-    setProducts(response.data); //Update products state with fetched data
+// const fetchProducts = async() => {
+//   try {
+//     setLoading(true);
+//     const response = await apiClient.get("/products"); //Axios GET Request
+//     setProducts(response.data); //Update products state with fetched data
     
-  } catch (error) {
-    setError(
-      error.response?.data?.message || "Failed to fetch products. Please try again."
-    ); // Extract error message of available
-  }
-  finally{
-    setLoading(false);
-  }
-};
+//   } catch (error) {
+//     setError(
+//       error.response?.data?.message || "Failed to fetch products. Please try again."
+//     ); // Extract error message of available
+//   }
+//   finally{
+//     setLoading(false);
+//   }
+// };
 
-if (loading){
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <span className="text-xl font-semibold">Loading products</span>
-    </div>
-  )
-}
+// if (loading){
+//   return (
+//     <div className="flex items-center justify-center min-h-screen">
+//       <span className="text-xl font-semibold">Loading products</span>
+//     </div>
+//   )
+// }
 
-if (error){  //if error is not null
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <span className="text-xl text-red-500">Error: {error}</span>  
-    </div>
-  )
-}
+// if (error){  //if error is not null
+//   return (
+//     <div className="flex items-center justify-center min-h-screen">
+//       <span className="text-xl text-red-500">Error: {error}</span>  
+//     </div>
+//   )
+// }
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8">
@@ -55,4 +63,14 @@ if (error){  //if error is not null
       <ProductListings products={products} />
     </div>
   );
+}
+
+export async function productsLoader(){
+  try {
+    const response = await apiClient.get("/products"); //Axios GET Request
+    return response.data; //Update products state with fetched data
+    
+  } catch (error) {
+      throw new Responese(error.message || "Failed to fetch products. Please try again.", {status:error.status}||500);
+  }
 }

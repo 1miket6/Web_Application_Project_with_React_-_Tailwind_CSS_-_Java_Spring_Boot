@@ -31,7 +31,8 @@ public class ProductController {
 //	}
 	
 	@GetMapping
-	public List <ProductDto> getProduct() {
+	public List <ProductDto> getProduct() throws InterruptedException { //DTO pattern
+		Thread.sleep(5000);
 		System.out.println("React StrictMode render 2 times for development.");
 	  List <ProductDto> productList = iproductService.getProducts();
 		return productList;
