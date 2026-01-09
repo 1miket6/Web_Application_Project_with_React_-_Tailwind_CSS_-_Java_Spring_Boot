@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="products")
-public class Product {
+public class Product extends BaseEntity{
 	
 	@Id //primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,14 +32,6 @@ public class Product {
 	private Integer popularity;
 	@Column(name="imageUrl")
 	private String imageUrl;
-	@Column(name="createdAt", nullable=false)
-	private Instant createdAt;
-	@Column(name="createdBy", nullable=false)
-	private String createdBy;
-	@Column(name="updatedAt")
-	private Instant updatedAt;
-	@Column(name="updatedBy")
-	private String updatedBy;
 	
 //	public Long getProductId() {
 //		return productId;

@@ -71,6 +71,7 @@ export async function productsLoader(){
     return response.data; //Update products state with fetched data
     
   } catch (error) {
-      throw new Responese(error.message || "Failed to fetch products. Please try again.", {status:error.status}||500);
+      throw new Responese(
+        error.response?.data?.errorMessage || error.message || "Failed to fetch products. Please try again.", {status:error.status}||500);
   }
 }
